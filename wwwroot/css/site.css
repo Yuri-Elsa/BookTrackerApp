@@ -1,22 +1,372 @@
-html {
-  font-size: 14px;
+/* ============================================
+   Rak Bacaan — design tokens
+   Tema: rak buku pribadi, bukan dashboard SaaS
+   ============================================ */
+:root {
+    --walnut: #2B2118;
+    --walnut-dark: #1D1610;
+    --parchment: #F6EFE1;
+    --parchment-soft: #EFE5D2;
+    --ink: #362B22;
+    --ink-soft: #6B5D4E;
+    --gold: #B8863B;
+    --gold-dark: #96692A;
+    --pine: #3F5B4B;
+    --pine-soft: #E4EDE7;
+    --burgundy: #8A3B3B;
+    --burgundy-soft: #F3E3E1;
+    --border-soft: #E1D3B8;
+    --shadow-warm: 0 10px 24px -14px rgba(43, 33, 24, 0.45);
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, Segoe UI, sans-serif;
 }
 
-@media (min-width: 768px) {
-  html {
+* {
+    box-sizing: border-box;
+}
+
+html {
     font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: var(--font-body);
+    background: var(--parchment);
+    color: var(--ink);
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--walnut);
+    letter-spacing: -0.01em;
+}
+
+a {
+    color: var(--gold-dark);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--walnut);
+    }
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ---------- Header / nav ---------- */
+.site-header {
+    background: var(--walnut);
+    border-bottom: 3px solid var(--gold);
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+}
+
+.site-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--parchment) !important;
+}
+
+.site-brand__mark {
+    font-size: 1.6rem;
+}
+
+.site-nav {
+    display: flex;
+    gap: 1.75rem;
+}
+
+    .site-nav a {
+        color: #D9C9A8 !important;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding-bottom: 2px;
+        border-bottom: 2px solid transparent;
+    }
+
+        .site-nav a:hover {
+            color: var(--parchment) !important;
+            border-bottom-color: var(--gold);
+        }
+
+/* ---------- Main / footer ---------- */
+.site-main {
+    flex: 1;
+    padding: 2.75rem 0 3.5rem;
+}
+
+.site-footer {
+    background: var(--walnut-dark);
+    color: #B8A88C;
+    font-size: 0.85rem;
+}
+
+.site-footer__inner {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+}
+
+.site-footer a {
+    color: #D9C9A8;
+}
+
+/* ---------- Hero ---------- */
+.shelf-hero {
+    margin-bottom: 2rem;
+}
+
+.shelf-hero__eyebrow {
+    font-family: var(--font-body);
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin: 0 0 0.35rem;
+}
+
+.shelf-hero h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+}
+
+.shelf-hero p {
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0;
+}
+
+/* ---------- Stat plaques ---------- */
+.shelf-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.75rem 0 2.25rem;
+}
+
+.shelf-stat {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow-warm);
+}
+
+.shelf-stat__value {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: var(--walnut);
+    line-height: 1;
+}
+
+.shelf-stat__label {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: 0.35rem;
+}
+
+/* ---------- Book grid (the "shelf") ---------- */
+.shelf-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.shelf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.book-card {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-left: 7px solid var(--spine-color, var(--gold));
+    border-radius: 4px 8px 8px 4px;
+    padding: 1.25rem 1.35rem;
+    box-shadow: var(--shadow-warm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    .book-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 16px 28px -14px rgba(43, 33, 24, 0.55);
+    }
+
+.book-card__title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--walnut);
+    line-height: 1.3;
+    margin: 0;
+}
+
+.book-card__author {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin: 0;
+}
+
+.book-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.15rem;
+}
+
+.book-card__price {
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.28rem 0.65rem;
+    border-radius: 999px;
+}
+
+.badge-status--read {
+    background: var(--pine-soft);
+    color: var(--pine);
+}
+
+.badge-status--unread {
+    background: var(--burgundy-soft);
+    color: var(--burgundy);
+}
+
+.book-card__actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border-soft);
+}
+
+    .book-card__actions form {
+        margin: 0;
+    }
+
+/* ---------- Buttons ---------- */
+.btn-shelf-primary {
+    background: var(--gold);
+    border: 1px solid var(--gold-dark);
+    color: #fff;
+    font-weight: 600;
+    padding: 0.55rem 1.15rem;
+    border-radius: 5px;
+}
+
+    .btn-shelf-primary:hover {
+        background: var(--gold-dark);
+        color: #fff;
+    }
+
+.btn-shelf-outline {
+    background: transparent;
+    border: 1px solid var(--border-soft);
+    color: var(--ink);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.32rem 0.7rem;
+    border-radius: 5px;
+}
+
+    .btn-shelf-outline:hover {
+        border-color: var(--gold);
+        color: var(--gold-dark);
+    }
+
+.btn-shelf-danger {
+    background: transparent;
+    border: 1px solid var(--burgundy);
+    color: var(--burgundy);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.32rem 0.7rem;
+    border-radius: 5px;
+}
+
+    .btn-shelf-danger:hover {
+        background: var(--burgundy);
+        color: #fff;
+    }
+
+/* ---------- Empty state ---------- */
+.shelf-empty {
+    text-align: center;
+    border: 1px dashed var(--border-soft);
+    border-radius: 8px;
+    padding: 3.5rem 1.5rem;
+    color: var(--ink-soft);
+    background: #fff;
+}
+
+    .shelf-empty h3 {
+        margin-bottom: 0.4rem;
+    }
+
+/* ---------- Forms ---------- */
+.shelf-form-card {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--shadow-warm);
+    max-width: 520px;
+}
+
+    .shelf-form-card label {
+        font-weight: 600;
+        color: var(--walnut);
+        font-size: 0.9rem;
+    }
+
+    .shelf-form-card .form-control {
+        border: 1px solid var(--border-soft);
+        border-radius: 5px;
+        padding: 0.55rem 0.75rem;
+    }
+
+        .shelf-form-card .form-control:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 0.2rem rgba(184, 134, 59, 0.18);
+        }
+
+/* ---------- Focus visibility ---------- */
+a:focus-visible, button:focus-visible, .form-control:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .book-card {
+        transition: none;
+    }
 }

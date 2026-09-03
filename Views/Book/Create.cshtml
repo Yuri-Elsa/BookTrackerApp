@@ -1,0 +1,51 @@
+@model BookTrackerApp.Models.Book
+
+@{
+    ViewData["Title"] = "Tambah Buku";
+}
+
+<div class="container">
+    <div class="shelf-hero">
+        <p class="shelf-hero__eyebrow">Buku baru</p>
+        <h1>Tambah Buku</h1>
+        <p>Masukkan detail buku yang ingin kamu simpan di rak.</p>
+    </div>
+
+    <div class="shelf-form-card">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="control-label">Judul</label>
+                <input asp-for="Title" class="form-control" placeholder="Contoh: Laut Bercerita" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Author" class="control-label">Penulis</label>
+                <input asp-for="Author" class="form-control" placeholder="Contoh: Leila S. Chudori" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Price" class="control-label">Harga</label>
+                <input asp-for="Price" class="form-control" placeholder="0" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-check mb-4">
+                <input asp-for="IsRead" class="form-check-input" />
+                <label asp-for="IsRead" class="form-check-label">Sudah Dibaca</label>
+            </div>
+
+            <div class="form-group d-flex gap-2">
+                <button type="submit" class="btn-shelf-primary">Simpan</button>
+                <a asp-action="Index" class="btn-shelf-outline">Batal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

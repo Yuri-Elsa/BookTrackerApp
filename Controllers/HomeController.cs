@@ -15,7 +15,7 @@ namespace BookTrackerApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Book");
         }
 
         public IActionResult Privacy()

@@ -24,6 +24,27 @@ project.assets.json
 ## Local Configuration & Environment Secrets
 appsettings.Development.json
 *.local.json
+secrets.json
+*.pfx
+*.pem
+*.key
+
+## Local Databases (jaga-jaga kalau pindah dari SQL Server ke LocalDB/SQLite)
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.sqlite3
+App_Data/
+
+## Test Results
+[Tt]est[Rr]esult*/
+*.trx
+
+## Other Editors / IDEs
+.idea/
+*.DotSettings.user
+.vscode/
 
 ## OS & Tooling Temporary Files
 .DS_Store

@@ -39,5 +39,88 @@ namespace BookTrackerApp.Controllers
             }
             return View(book);
         }
+
+        // EDIT: Form Edit Buku (GET)
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = _db.Books.Find(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
+
+        // EDIT: Simpan Perubahan Buku (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Book book)
+        {
+            if (id != book.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Books.Update(book);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(book);
+        }
+
+        // DELETE: Konfirmasi Hapus Buku (GET)
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = _db.Books.Find(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
+
+        // DELETE: Hapus Buku dari Database (POST)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var book = _db.Books.Find(id);
+            if (book != null)
+            {
+                _db.Books.Remove(book);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
+        // TOGGLE: Tandai buku sudah/belum dibaca langsung dari daftar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ToggleRead(int id)
+        {
+            var book = _db.Books.Find(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            book.IsRead = !book.IsRead;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

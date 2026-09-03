@@ -1,0 +1,37 @@
+@model BookTrackerApp.Models.Book
+
+@{
+    ViewData["Title"] = "Hapus Buku";
+}
+
+<div class="container">
+    <div class="shelf-hero">
+        <p class="shelf-hero__eyebrow">Konfirmasi</p>
+        <h1>Hapus Buku</h1>
+        <p>Tindakan ini tidak bisa dibatalkan. Pastikan kamu memang ingin menghapus buku berikut dari rak.</p>
+    </div>
+
+    <div class="shelf-form-card">
+        <div class="book-card mb-4" style="--spine-color: #8A3B3B">
+            <p class="book-card__title">@Model.Title</p>
+            <p class="book-card__author">@Model.Author</p>
+            <div class="book-card__meta">
+                <span class="book-card__price">Rp @Model.Price.ToString("N0")</span>
+                @if (Model.IsRead)
+                {
+                    <span class="badge-status badge-status--read">Selesai Dibaca</span>
+                }
+                else
+                {
+                    <span class="badge-status badge-status--unread">Belum Dibaca</span>
+                }
+            </div>
+        </div>
+
+        <form asp-action="Delete" method="post" class="d-flex gap-2">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn-shelf-danger" style="padding: 0.55rem 1.15rem; font-size: 0.95rem;">Ya, Hapus</button>
+            <a asp-action="Index" class="btn-shelf-outline">Batal</a>
+        </form>
+    </div>
+</div>
