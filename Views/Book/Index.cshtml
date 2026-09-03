@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BookTrackerApp.Models.Book>
+
+<h2 class="mt-4">📚 Daftar Buku Bacaan</h2>
+<a asp-controller="Book" asp-action="Create" class="btn btn-primary my-3">+ Tambah Buku Baru</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Judul</th>
+            <th>Penulis</th>
+            <th>Harga</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>Rp @book.Price.ToString("N0")</td>
+                <td>
+                    @if (book.IsRead)
+                    {
+                        <span class="badge bg-success">Selesai Dibaca</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Belum Dibaca</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
