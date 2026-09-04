@@ -1,7 +1,11 @@
-using Microsoft.EntityFrameworkCore;
 using BookTrackerApp.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
 // Add DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

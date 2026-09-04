@@ -29,8 +29,9 @@
 
             <div class="form-group mb-3">
                 <label asp-for="Price" class="control-label">Harga</label>
-                <input asp-for="Price" class="form-control" placeholder="0" />
+                <input asp-for="Price" class="form-control" step="any" />
                 <span asp-validation-for="Price" class="text-danger"></span>
+                <small class="text-muted">Gunakan titik untuk desimal, contoh: 15000.50</small>
             </div>
 
             <div class="form-check mb-4">
