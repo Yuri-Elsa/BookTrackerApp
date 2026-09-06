@@ -17,7 +17,10 @@
                 <span class="site-brand__mark">&#128218;</span>
                 <span class="site-brand__text">Rak Bacaan</span>
             </a>
-            <nav class="site-nav">
+            <button type="button" class="nav-toggle" aria-label="Buka menu" aria-expanded="false" aria-controls="siteNav">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="site-nav" id="siteNav">
                 <a asp-controller="Book" asp-action="Index">Koleksi</a>
                 <a asp-controller="Book" asp-action="Create">Tambah Buku</a>
             </nav>

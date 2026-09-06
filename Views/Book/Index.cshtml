@@ -22,6 +22,18 @@
         }
         return spineColors[hash % spineColors.Length];
     }
+
+    // Pilih kelas ukuran font berdasarkan panjang teks angka,
+    // supaya "2" dan "Rp 999.999.999.999" sama-sama muat rapi di kartu.
+    string StatValueClass(string text)
+    {
+        if (text.Length <= 8) return "shelf-stat__value--xl";
+        if (text.Length <= 11) return "shelf-stat__value--lg";
+        if (text.Length <= 14) return "shelf-stat__value--md";
+        return "shelf-stat__value--sm";
+    }
+
+    var totalValueText = "Rp " + totalValue.ToString("N0");
 }
 
 <div class="container">
@@ -32,26 +44,38 @@
     </div>
 
     <div class="shelf-stats">
-        <div class="shelf-stat">
-            <div class="shelf-stat__value">@totalBooks</div>
-            <div class="shelf-stat__label">Total Buku</div>
+        <div class="shelf-stat" style="--accent: var(--gold); --accent-soft: var(--gold-soft)">
+            <span class="shelf-stat__icon">📚</span>
+            <div class="shelf-stat__body">
+                <div class="shelf-stat__value @StatValueClass(totalBooks.ToString())" title="@totalBooks">@totalBooks</div>
+                <div class="shelf-stat__label">Total Buku</div>
+            </div>
         </div>
-        <div class="shelf-stat">
-            <div class="shelf-stat__value">@readCount</div>
-            <div class="shelf-stat__label">Selesai Dibaca</div>
+        <div class="shelf-stat" style="--accent: var(--pine); --accent-soft: var(--pine-soft)">
+            <span class="shelf-stat__icon">✅</span>
+            <div class="shelf-stat__body">
+                <div class="shelf-stat__value @StatValueClass(readCount.ToString())" title="@readCount">@readCount</div>
+                <div class="shelf-stat__label">Selesai Dibaca</div>
+            </div>
         </div>
-        <div class="shelf-stat">
-            <div class="shelf-stat__value">@unreadCount</div>
-            <div class="shelf-stat__label">Belum Dibaca</div>
+        <div class="shelf-stat" style="--accent: var(--burgundy); --accent-soft: var(--burgundy-soft)">
+            <span class="shelf-stat__icon">📖</span>
+            <div class="shelf-stat__body">
+                <div class="shelf-stat__value @StatValueClass(unreadCount.ToString())" title="@unreadCount">@unreadCount</div>
+                <div class="shelf-stat__label">Belum Dibaca</div>
+            </div>
         </div>
-        <div class="shelf-stat">
-            <div class="shelf-stat__value">Rp @totalValue.ToString("N0")</div>
-            <div class="shelf-stat__label">Nilai Koleksi</div>
+        <div class="shelf-stat" style="--accent: var(--walnut); --accent-soft: var(--walnut-soft)">
+            <span class="shelf-stat__icon">💰</span>
+            <div class="shelf-stat__body">
+                <div class="shelf-stat__value @StatValueClass(totalValueText)" title="@totalValueText">@totalValueText</div>
+                <div class="shelf-stat__label">Nilai Koleksi</div>
+            </div>
         </div>
     </div>
 
     <div class="shelf-toolbar">
-        <h2 class="h4 mb-0">Semua Buku</h2>
+        <h2 class="shelf-section-title">Semua Buku</h2>
         <a asp-controller="Book" asp-action="Create" class="btn-shelf-primary">+ Tambah Buku Baru</a>
     </div>
 
@@ -83,13 +107,15 @@
                         }
                     </div>
                     <div class="book-card__actions">
-                        <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id" class="btn-shelf-outline">Edit</a>
-                        <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" class="btn-shelf-danger">Hapus</a>
-                        <form asp-controller="Book" asp-action="ToggleRead" asp-route-id="@book.Id" method="post">
-                            <button type="submit" class="btn-shelf-outline">
-                                @(book.IsRead ? "Tandai Belum" : "Tandai Selesai")
-                            </button>
-                        </form>
+                        <div class="book-card__actions-group">
+                            <a asp-controller="Book" asp-action="Edit" asp-route-id="@book.Id" class="btn-shelf-outline">Edit</a>
+                            <form asp-controller="Book" asp-action="ToggleRead" asp-route-id="@book.Id" method="post">
+                                <button type="submit" class="btn-shelf-outline">
+                                    @(book.IsRead ? "Tandai Belum" : "Tandai Selesai")
+                                </button>
+                            </form>
+                        </div>
+                        <a asp-controller="Book" asp-action="Delete" asp-route-id="@book.Id" class="link-danger-subtle">Hapus</a>
                     </div>
                 </div>
             }

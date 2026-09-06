@@ -11,39 +11,54 @@
         <p>Masukkan detail buku yang ingin kamu simpan di rak.</p>
     </div>
 
-    <div class="shelf-form-card">
-        <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="shelf-form-layout">
+        <div class="shelf-form-card">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Title" class="control-label">Judul</label>
-                <input asp-for="Title" class="form-control" placeholder="Contoh: Laut Bercerita" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Title" class="control-label">Judul</label>
+                    <input asp-for="Title" class="form-control" placeholder="Contoh: Laut Bercerita" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Author" class="control-label">Penulis</label>
-                <input asp-for="Author" class="form-control" placeholder="Contoh: Leila S. Chudori" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Author" class="control-label">Penulis</label>
+                    <input asp-for="Author" class="form-control" placeholder="Contoh: Leila S. Chudori" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="Price" class="control-label">Harga</label>
-                <input asp-for="Price" class="form-control" step="any" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-                <small class="text-muted">Gunakan titik untuk desimal, contoh: 15000.50</small>
-            </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Price" class="control-label">Harga</label>
+                    <input asp-for="Price" class="form-control" step="any" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                    <small class="text-muted">Gunakan titik untuk desimal, contoh: 15000.50</small>
+                </div>
 
-            <div class="form-check mb-4">
-                <input asp-for="IsRead" class="form-check-input" />
-                <label asp-for="IsRead" class="form-check-label">Sudah Dibaca</label>
-            </div>
+                <div class="form-check mb-4">
+                    <input asp-for="IsRead" class="form-check-input" />
+                    <label asp-for="IsRead" class="form-check-label">Sudah Dibaca</label>
+                </div>
 
-            <div class="form-group d-flex gap-2">
-                <button type="submit" class="btn-shelf-primary">Simpan</button>
-                <a asp-action="Index" class="btn-shelf-outline">Batal</a>
+                <div class="form-group d-flex gap-2">
+                    <button type="submit" class="btn-shelf-primary">Simpan</button>
+                    <a asp-action="Index" class="btn-shelf-outline">Batal</a>
+                </div>
+            </form>
+        </div>
+
+        <aside class="shelf-preview">
+            <p class="shelf-preview__label">Pratinjau Kartu</p>
+            <div class="book-card" style="--spine-color: var(--gold-dark)">
+                <p class="book-card__title" id="previewTitle">Judul Buku</p>
+                <p class="book-card__author" id="previewAuthor">Nama Penulis</p>
+                <div class="book-card__meta">
+                    <span class="book-card__price" id="previewPrice">Rp 0</span>
+                    <span class="badge-status badge-status--unread" id="previewBadge">Belum Dibaca</span>
+                </div>
             </div>
-        </form>
+            <p class="shelf-preview__hint">Kartu ini otomatis berubah sesuai isian form di sebelah kiri.</p>
+        </aside>
     </div>
 </div>
 
