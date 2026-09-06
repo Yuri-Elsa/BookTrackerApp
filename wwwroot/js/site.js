@@ -52,4 +52,47 @@ document.addEventListener('DOMContentLoaded', function () {
             el.addEventListener('change', updatePreview);
         });
     }
+
+    // ---------- Auto-fit angka statistik ----------
+    // Kelas ukuran dari server (--xl/--lg/--md/--sm/--xs) cuma tebakan awal
+    // berdasar jumlah karakter. Di sini kita ukur lebar SEBENARNYA di layar
+    // pengguna dan kecilkan font sampai benar-benar pas, tanpa pernah
+    // memotong (ellipsis) angkanya. Kalau sudah di font minimum dan masih
+    // kepanjangan (angka ekstrem), baru dibiarkan pindah baris.
+    function fitStatValue(el) {
+        if (!el.dataset.baseFontPx) {
+            el.dataset.baseFontPx = parseFloat(window.getComputedStyle(el).fontSize);
+        }
+
+        var minPx = 11;
+        var size = parseFloat(el.dataset.baseFontPx);
+
+        el.style.whiteSpace = 'nowrap';
+        el.style.fontSize = size + 'px';
+
+        while (el.scrollWidth > el.clientWidth && size > minPx) {
+            size -= 1;
+            el.style.fontSize = size + 'px';
+        }
+
+        if (el.scrollWidth > el.clientWidth) {
+            // Tetap kepanjangan walau sudah di ukuran minimum: biarkan wrap
+            // daripada disembunyikan/dipotong.
+            el.style.whiteSpace = 'normal';
+        }
+    }
+
+    function fitAllStatValues() {
+        document.querySelectorAll('.shelf-stat__value').forEach(fitStatValue);
+    }
+
+    if (document.querySelector('.shelf-stat__value')) {
+        fitAllStatValues();
+
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(fitAllStatValues, 150);
+        });
+    }
 });

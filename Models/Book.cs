@@ -9,9 +9,11 @@ namespace BookTrackerApp.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Judul buku wajib diisi")]
+        [StringLength(200, ErrorMessage = "Judul maksimal 200 karakter")]
         public string Title { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Nama penulis wajib diisi")]
+        [StringLength(150, ErrorMessage = "Nama penulis maksimal 150 karakter")]
         public string Author { get; set; } = string.Empty;
 
         [Column(TypeName = "decimal(18,2)")]

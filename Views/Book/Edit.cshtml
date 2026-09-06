@@ -54,7 +54,7 @@
                 <p class="book-card__title" id="previewTitle">@Model.Title</p>
                 <p class="book-card__author" id="previewAuthor">@Model.Author</p>
                 <div class="book-card__meta">
-                    <span class="book-card__price" id="previewPrice">Rp @Model.Price.ToString("N0")</span>
+                    <span class="book-card__price" id="previewPrice">Rp @Model.Price.ToString("N0", new System.Globalization.CultureInfo("id-ID"))</span>
                     <span class="badge-status @(Model.IsRead ? "badge-status--read" : "badge-status--unread")" id="previewBadge">@(Model.IsRead ? "Selesai Dibaca" : "Belum Dibaca")</span>
                 </div>
             </div>

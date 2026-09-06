@@ -30,10 +30,12 @@
         if (text.Length <= 8) return "shelf-stat__value--xl";
         if (text.Length <= 11) return "shelf-stat__value--lg";
         if (text.Length <= 14) return "shelf-stat__value--md";
-        return "shelf-stat__value--sm";
+        if (text.Length <= 20) return "shelf-stat__value--sm";
+        return "shelf-stat__value--xs";
     }
 
-    var totalValueText = "Rp " + totalValue.ToString("N0");
+    var idID = new System.Globalization.CultureInfo("id-ID");
+    var totalValueText = "Rp " + totalValue.ToString("N0", idID);
 }
 
 <div class="container">
@@ -96,7 +98,7 @@
                     <p class="book-card__title">@book.Title</p>
                     <p class="book-card__author">@book.Author</p>
                     <div class="book-card__meta">
-                        <span class="book-card__price">Rp @book.Price.ToString("N0")</span>
+                        <span class="book-card__price">Rp @book.Price.ToString("N0", idID)</span>
                         @if (book.IsRead)
                         {
                             <span class="badge-status badge-status--read">Selesai Dibaca</span>
