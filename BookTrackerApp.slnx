@@ -1,3 +1,6 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="appsettings.Production.json" />
+  </Folder>
   <Project Path="BookTrackerApp.csproj" />
 </Solution>
