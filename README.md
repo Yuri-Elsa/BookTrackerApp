@@ -2,6 +2,8 @@
 
 Aplikasi sederhana buat catat koleksi buku pribadi — judul, penulis, harga, dan status udah/belum dibaca. Dibuat sambil belajar C#, OOP, dan ASP.NET Core MVC.
 
+Aplikasi ini juga sudah dideploy di: http://yuri.runasp.net/
+
 ## Fitur
 
 - Tambah, lihat, edit, dan hapus data buku (CRUD)
@@ -38,6 +40,7 @@ BookTrackerApp/
 ## Cara Menjalankan di Lokal
 
 **Yang perlu disiapkan dulu:**
+
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/id-id/download/dotnet/8.0)
 - [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (Express juga cukup)
 - Visual Studio (opsional, bisa juga pakai CLI)
@@ -45,12 +48,14 @@ BookTrackerApp/
 **Langkah-langkah:**
 
 1. Clone repo ini
+
    ```bash
    git clone https://github.com/Yuri-Elsa/BookTrackerApp.git
    cd BookTrackerApp
    ```
 
 2. Sesuaikan connection string di `appsettings.json` kalau perlu (default-nya pakai `localhost`):
+
    ```json
    "ConnectionStrings": {
      "DefaultConnection": "Server=localhost;Database=BookTrackerDb;Trusted_Connection=True;TrustServerCertificate=True;"
@@ -58,11 +63,13 @@ BookTrackerApp/
    ```
 
 3. Buat database & jalankan migration:
+
    ```bash
    dotnet ef database update
    ```
 
 4. Jalankan aplikasinya:
+
    ```bash
    dotnet run
    ```
